@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.multipart.saveDir"
+		value="javax.servlet.context.tempdir" />
+
+	<package name="default" extends="json-default">
+		<action name="registeruser"
+			class="com.example.action.RegisterAction">
+			<result name="REGISTER" type="json"></result>
+		</action>
+		
+		<action name="report" class="com.example.action.ReportAction">
+			<result name="REPORT" type="json"></result>
+		</action>
+		
+		<action name="updateuser"
+			class="com.example.action.UpdateAction">
+			<result name="UPDATE" type="json"></result>
+		</action>
+		
+		<action name="deleteuser"
+			class="com.example.action.DeleteAction">
+			<result name="DELETE" type="json"></result>
+		</action>
+		
+		<action name="export" class="com.example.action.exportExcel"
+			method="exportInExcel">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="EmployeeList.xlsx"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<action name="exportPdf"
+			class="com.example.action.ExtractPdfAction">
+		</action>
+
+		<action name="resultAction"
+			class="com.example.action.RoleFileUploadAction">
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="i18n" />
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">10240</param>
+			</interceptor-ref>
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="validation">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+			<interceptor-ref name="workflow">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor-ref>
+
+			<result name="success">report.jsp</result>
+		</action>
+		
+	</package>
+</struts>
