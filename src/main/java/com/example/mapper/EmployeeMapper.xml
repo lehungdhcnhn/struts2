@@ -13,7 +13,7 @@
   		SELECT uname, upass, uemail, udeg ,usalary FROM  tabletest;
   	</select>
   	<insert id="insertEmployee" parameterType="Employee">
-  		INSERT INTO tabletest values (#{uname},#{upass},#{uemail},#{udeg},#{usalary});
+  		INSERT INTO tabletest (uname, upass, uemail,udeg, usalary) values (#{uname},#{upass},#{uemail},#{udeg},#{usalary});
   	</insert>
   	<update id="updateEmployee" parameterType="Employee">
   		UPDATE tabletest set uname=#{uname}, upass=#{upass}, udeg=#{udeg},usalary=#{usalary} where uemail=#{uemail};

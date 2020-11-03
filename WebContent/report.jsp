@@ -334,7 +334,7 @@
 												class="form-control input-sm" placeholder="Password">
 										</div>
 										<div class="form-group">
-											<input type="text" name="usalary" id="usalary"
+											<input type="text" name="usalary" id="salary"
 												class="form-control input-sm" placeholder="Salary">
 										</div>
 										<button onclick="addNewRecord();"

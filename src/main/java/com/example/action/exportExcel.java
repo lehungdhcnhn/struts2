@@ -38,8 +38,9 @@ public class exportExcel extends ActionSupport{
 		dao = new EmployeeDAO();
 		listEmp =dao.getAllData();
 		ex= new ExcelCreator();
-		XSSFWorkbook wb =ex.exportInExcel(listEmp);
+		
 		try {
+			XSSFWorkbook wb =ex.exportInExcel(listEmp);
 			ByteArrayOutputStream boas = new ByteArrayOutputStream();
 			wb.write(boas);
 			setInputStream(new ByteArrayInputStream(boas.toByteArray()));

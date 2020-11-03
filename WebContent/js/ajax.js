@@ -1,6 +1,5 @@
-	$("#formExcel").submit();
-
-	$("#formExcel").ajaxForm(
+$("#formExcel").submit();
+$("#formExcel").ajaxForm(
 			{
 				url : "resultAction.action",
 				dataType : "json",
@@ -38,12 +37,12 @@
 		var udeg = $("#deg").val();
 		var uemail = $("#email").val();
 		var upass = $("#pass").val();
-		var usalary = $("#usalary").val();
+		var usalary = $("#salary").val();
 		$.ajax({
 			type : "POST",
 			url : "registeruser.action",
 			data : "uname=" + uname + "&udeg=" + udeg + "&uemail=" + uemail
-					+ "&upass=" + upass + "&usala" + usalary,
+					+ "&upass=" + upass + "&usalary=" + usalary,
 			success : function(data) {
 				var ht = data.msg;
 				$("#resp").html(ht);
@@ -78,7 +77,7 @@
 													+ "<td class='center'>"
 													+ this.udeg
 													+ "</td>"
-													+ "<td class='center' id='price'>"
+													+ "<td  class='center'>"
 													+ this.usalary
 													+ "</td>"
 													+ "<td class='center'>"
@@ -92,31 +91,8 @@
 						alert("Some error occured.");
 					}
 				});
-		 $('#price').each(function() {
-			 var sum = 0;
-				$("#price").each(function() {
-					var value = $(this).text();
-					// add only if the value is number
-					if (!isNaN(value) && value.length != 0) {
-						sum += parseFloat(value);
-					}
-				});
-				document.getElementById("resultTotal").innerHTML = sum;
-		});
- 
 	};
 
-	// function for fecthing old information into the form
-	function fetchOldRecord(that) {
-		$("#uname").val($(that).parent().prev().prev().prev().prev().text());
-		$("#uemail").val($(that).parent().prev().prev().prev().text());
-		$("#upass").val("");
-		$("#udeg").val($(that).parent().prev().text());
-		$("#usalary").val($(that).parent.prev().prev().prev().prev().text());
-		$("#hiddenuemail").val($(that).parent().prev().prev().prev().text());
-	}
-
-	// function for updating new information into database
 	function updateNewRecord() {
 		$.ajax({
 			type : "POST",
@@ -124,7 +100,7 @@
 			data : "uname=" + $("#uname").val() + "&uemail="
 					+ $("#uemail").val() + "&upass=" + $("#upass").val()
 					+ "&udeg=" + $("#udeg").val() + "&hiddenuemail="
-					+ $("#hiddenuemail").val() + $("#usalary").val(),
+					+ $("#hiddenuemail").val() + "&usalary="+$("#usalary").val(),
 			success : function(result) {
 
 				location.reload();
@@ -135,8 +111,7 @@
 		});
 	}
 
-	// function for deleting user information from database
-	function deleteUser(that) {
+function deleteUser(that) {
 		$.ajax({
 			type : "POST",
 			url : "deleteuser.action",
@@ -156,3 +131,11 @@
 		});
 	}
 
+function fetchOldRecord(that) {
+		$("#uname").val($(that).parent().prev().prev().prev().prev().prev().text());
+		$("#udeg").val($(that).parent().prev().prev().text());
+		$("#uemail").val($(that).parent().prev().prev().prev().prev().text());
+		$("#upass").val("");	
+		$("#usalary").val($(that).parent().prev().text());
+		$("#hiddenuemail").val($(that).parent().prev().prev().prev().text());
+}

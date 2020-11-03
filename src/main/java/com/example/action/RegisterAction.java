@@ -10,30 +10,27 @@ public class RegisterAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String uname, udeg, uemail, upass, msg;
-	private double usalary;
+	private String uname, udeg, uemail, upass, msg,usalary;
+	
 	EmployeeDAO dao = null;
 	Employee employee = null;
 	
 	@Override
 	public String execute() throws Exception{
-		employee = new Employee(uname,uemail,udeg,upass,usalary);
+		double sala= Double.valueOf(usalary);
+		employee = new Employee(uname,uemail,udeg,upass,sala);
 		dao = new EmployeeDAO();
 		msg= dao.save(employee);
 		return "REGISTER";
 	}
 	
-	
-	public double getUsalary() {
+	public String getUsalary() {
 		return usalary;
 	}
 
-
-	public void setUsalary(double usalary) {
+	public void setUsalary(String usalary) {
 		this.usalary = usalary;
 	}
-
-
 	public String getUname() {
 		return uname;
 	}
