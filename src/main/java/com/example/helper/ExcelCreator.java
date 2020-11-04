@@ -245,7 +245,7 @@ public class ExcelCreator {
 			}
 			System.out.println("import excel complete");	
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return employeeList;
 	}

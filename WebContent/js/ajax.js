@@ -115,7 +115,7 @@ function deleteUser(that) {
 		$.ajax({
 			type : "POST",
 			url : "deleteuser.action",
-			data : "uemail=" + $(that).parent().prev().prev().prev().text(),
+			data : "uemail=" +$(that).parent().prev().prev().prev().prev().text(),
 			success : function(data) {
 				if (data.msg === "Delete Successful") {
 					alert(data.msg)
